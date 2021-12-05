@@ -1,0 +1,19 @@
+{
+  "name": "atividade-diw",
+  "version": "1.0.0",
+  "description": "Atividade de DIW - Pedro\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5\u001b[C\u001b[C\u001b\u001b[F\u001b[B\u001b[1;5C\u001b[1;5C\u001b[1;5C\u001b[F\u001b[A\u001b[B\u001b[B\u001b[1;5F\u001b[B\u001b[F\u001b[B\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[CPessoa",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yzPeedro/Atividade-DIW---06-12.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yzPeedro/Atividade-DIW---06-12/issues"
+  },
+  "homepage": "https://github.com/yzPeedro/Atividade-DIW---06-12#readme"
+}
