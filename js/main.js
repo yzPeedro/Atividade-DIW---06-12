@@ -29,8 +29,11 @@ const app = new Vue({
         searchInGit: function(param) {
             axios.get(`https://api.github.com/search/repositories?q=${param}`).then(res=>{
                 this.gitResponse = res.data;
-                toastr.success("Pesquisa encontrada", "Sucesso");
+                if(res.data.items.length <= 0) {
+                    toastr.warning(`Nenhum repositório com o nome '${param}' encontrado`, 'Atenção')
+                }
             }).catch(err=>{
+                console.log(err);
                 switch(err.response.status) {
                     case 404:
                         toastr.error("Nenhum dado encontrado", 'Erro');

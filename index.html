@@ -43,7 +43,7 @@
                     <p>{{ myProfile.bio }}</p>
                     <a v-bind:href="myProfile.html_url">Link para o perfil</a>
                     <span>Seguidores: {{ myProfile.followers }}</span>
-                    <span>Repositórios públicos: {{ myProfile.public_repos }}</span>
+                    <a v-bind:href="myProfile.repos_url"><span>Repositórios públicos: {{ myProfile.public_repos }}</span></a>
                     <button data-toggle="modal" data-target="#meusSeguidoresModal" class="btn btn-outline-info mt-5">Seguidores</button>
                 </div>
             </div>
@@ -78,7 +78,7 @@
             <div class="col-md-6 mt-5">
                 <div class="form-group">
                     <label for="searchProfile">Pesquisar Perfil:</label>
-                    <input v-model.lazy="profileName" type="text" name="search_profile" id="searchProfile" class="form-control" placeholder="Pesquisar">
+                    <input v-model.lazy="profileName" type="text" name="search_profile" id="searchProfile" class="form-control" placeholder="Pesquisar usuário ex.: yzPeedro">
                 </div>
             </div>
 
@@ -92,9 +92,9 @@
                             <p>{{ profileData.bio }}</p>
                             <a v-bind:href="profileData.html_url">Link para o perfil</a>
                             <span>Seguidores: {{ profileData.followers }}</span>
-                            <span>Repositórios públicos: {{ profileData.public_repos }}</span>
+                            <a v-bind:href="profileData.repos_url"><span>Repositórios públicos: {{ profileData.public_repos }}</span></a>
                         </div>
-                        <span data-toggle="modal" data-target="#seguidoresModal" class="btn btn-outline-info">Segidores: {{ profileData.followers}}</span>
+                        <span data-toggle="modal" data-target="#seguidoresModal" class="btn btn-outline-info">Seguidores: {{ profileData.followers}}</span>
                         <span data-toggle="modal" data-target="#repositoriosModal" class="btn btn-outline-danger mt-2">Repositórios</span>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
             <div class="col-md-12 mt-5">
                 <div class="form-group">
                     <label for="searchGIT">Pesquisar no GITHUB:</label>
-                    <input v-model.lazy="gitSearch" type="text" name="search_profile" id="searchGIT" class="form-control" placeholder="Pesquisar repositório">
+                    <input v-model.lazy="gitSearch" type="text" name="search_profile" id="searchGIT" class="form-control" placeholder="Pesquisar repositório ex.: tetris">
                 </div>
             </div>
             <hr>
@@ -176,7 +176,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/main.js"></script>
 </body>
