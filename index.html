@@ -154,15 +154,18 @@
             <div class="col-md-12 mt-5">
                 <div class="form-group">
                     <label for="searchGIT">Pesquisar no GITHUB:</label>
-                    <input v-model.lazy="gitSearch" type="text" name="search_profile" id="searchGIT" class="form-control" placeholder="ex: github api">
+                    <input v-model.lazy="gitSearch" type="text" name="search_profile" id="searchGIT" class="form-control" placeholder="Pesquisar repositório">
                 </div>
             </div>
             <hr>
-            <div v-if="gitResponse !== ''">
-                <div v-for="response in gitResponse.items" class="col-md-4 mt-4 d-flex flex-column justify-content-around">
+            <div v-if="gitResponse !== ''" class="d-flex flex-column align-items-center justify-content-center w-100">
+                <div v-for="response in gitResponse.items" class="p-4 mb-5 d-flex flex-column w-100 text-center" style="box-shadow: 0 2px 10px #c2c2c2">
                     <b>{{ response.name }}</b>
-                    <span>Quantidade de forks: {{ response.forks_count }}</span>
-                    <a v-bind:href="response.html_url">Acessar GIT</a>
+                    <span>{{ response.id }}</span>
+                    <a v-bind:href="response.html_url">{{ response.full_name }}</a>
+                    <span>Quantidade de forks: {{ response.forks }}</span>
+                    <span>Linguagem: {{ response.language }}</span>
+                    <span>Feito por: <a v-bind:href="response.owner.html_url">{{ response.owner.login }}</a></span>
                     <hr>
                 </div>
             </div>

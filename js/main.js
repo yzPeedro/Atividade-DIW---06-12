@@ -27,15 +27,13 @@ const app = new Vue({
     },
     methods: {
         searchInGit: function(param) {
-            axios.get(`https://api.github.com/search/code`, {
-                q: param
-            }).then(res=>{
+            axios.get(`https://api.github.com/search/repositories?q=${param}`).then(res=>{
                 this.gitResponse = res.data;
                 toastr.success("Pesquisa encontrada", "Sucesso");
             }).catch(err=>{
                 switch(err.response.status) {
                     case 404:
-                        toastr.error("Usuário não encontrado", 'Erro');
+                        toastr.error("Nenhum dado encontrado", 'Erro');
                         break;
                     case 403:
                         toastr.error("Limite de requisições excedido", 'Erro');
