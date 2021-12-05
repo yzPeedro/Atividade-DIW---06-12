@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atividade - Pedro Pessoa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Atividade DIW - Pedro Pessoa</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" href="#myProfileNavigation">Meu Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="#searchProfileNavigation">Pesquisar Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="#searchGITNavigation">Pesquisar no github</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" id="app" style="margin-top: 100px;">
+        <div class="row mt-5" id="myProfileNavigation">
+
+            <div class="col-md-6" v-show="myProfile !== ''">
+                <h3>Meu Perfil</h3>
+                <img v-bind:src="myProfile.avatar_url" alt="Imagem do perfil yzPeedro" class="w-50 h-70 rounded">
+            </div>
+            <div class="col-md-6" v-show="myProfile !== ''">
+                <div class="d-flex flex-column">
+                    <b>{{ myProfile.login }}</b>
+                    <p>{{ myProfile.bio }}</p>
+                    <a v-bind:href="myProfile.html_url">Link para o perfil</a>
+                    <span>Seguidores: {{ myProfile.followers }}</span>
+                    <span>Repositórios públicos: {{ myProfile.public_repos }}</span>
+                    <button data-toggle="modal" data-target="#meusSeguidoresModal" class="btn btn-outline-info mt-5">Seguidores</button>
+                </div>
+            </div>
+
+            <!-- Modal Meus Seguidores -->
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="meusSeguidoresModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content p-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Meus Seguidores</h5>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <hr>
+                        <div class="mt-5">
+                            <div style="box-shadow: 0 2px 10px #c2c2c2" class="d-flex p-3 mb-5 flex-column justify-content-around align-items-center" v-for="myFollower in myFollowers">
+                                <img v-bind:src="myFollower.avatar_url" style="width: 70px; height: 70px;" alt="#">
+                                <b>{{ myFollower.login }}</b>
+                                <span>id: {{ myFollower.id }}</span>
+                                <a v-bind:href="myFollower.followers_url">Seguidores</a>
+                                <span>Tipo: {{ myFollower.type }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row mt-5" id="searchProfileNavigation">
+            <div class="col-md-6 mt-5">
+                <div class="form-group">
+                    <label for="searchProfile">Pesquisar Perfil:</label>
+                    <input v-model.lazy="profileName" type="text" name="search_profile" id="searchProfile" class="form-control" placeholder="Pesquisar">
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-5" v-if="profileData !== ''">
+                <div class="row">
+                    <div class="col-md-12 d-flex flex-column justify-content-around">
+                        <hr>
+                        <div class="col-md-12 d-flex flex-column">
+                            <img v-bind:src="profileData.avatar_url" alt="Avatar GitHUB" style="width: 150px; height: 150px; box-shadow: 0 2px 10px #c2c2c2"/>
+                            <b>{{ profileData.login }}</b>
+                            <p>{{ profileData.bio }}</p>
+                            <a v-bind:href="profileData.html_url">Link para o perfil</a>
+                            <span>Seguidores: {{ profileData.followers }}</span>
+                            <span>Repositórios públicos: {{ profileData.public_repos }}</span>
+                        </div>
+                        <span data-toggle="modal" data-target="#seguidoresModal" class="btn btn-outline-info">Segidores: {{ profileData.followers}}</span>
+                        <span data-toggle="modal" data-target="#repositoriosModal" class="btn btn-outline-danger mt-2">Repositórios</span>
+                    </div>
+                </div>
+
+                <!-- Modal Repositorios -->
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="repositoriosModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content p-4">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Repositórios</h5>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <hr>
+                            <div class="row p-5">
+                                <div class="mt-3 w-100" v-for="repo in profileRepos">
+                                    <b>{{ repo.name }}</b>
+                                    <p>{{ repo.description }}</p>
+                                    <a v-bind:href="repo.html_url">{{ repo.full_name }}</a>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Seguidores -->
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="seguidoresModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content p-4">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Seguidores</h5>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <hr>
+                            <div class="mt-5">
+                                <div style="box-shadow: 0 2px 10px #c2c2c2" class="d-flex p-3 mb-5 flex-column justify-content-around align-items-center" v-for="follower in profileFollowers">
+                                    <img v-bind:src="follower.avatar_url" style="width: 70px; height: 70px;" alt="#">
+                                    <b>{{ follower.login }}</b>
+                                    <span>id: {{ follower.id }}</span>
+                                    <a v-bind:href="follower.followers_url">Seguidores</a>
+                                    <span>Tipo: {{ follower.type }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5" id="searchGITNavigation">
+            <div class="col-md-12 mt-5">
+                <div class="form-group">
+                    <label for="searchGIT">Pesquisar no GITHUB:</label>
+                    <input v-model.lazy="gitSearch" type="text" name="search_profile" id="searchGIT" class="form-control" placeholder="ex: github api">
+                </div>
+            </div>
+            <hr>
+            <div v-if="gitResponse !== ''">
+                <div v-for="response in gitResponse.items" class="col-md-4 mt-4 d-flex flex-column justify-content-around">
+                    <b>{{ response.name }}</b>
+                    <span>Quantidade de forks: {{ response.forks_count }}</span>
+                    <a v-bind:href="response.html_url">Acessar GIT</a>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
